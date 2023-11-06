@@ -2,7 +2,7 @@ import express, { json } from 'express';
 import cors from 'cors';
 const app = express();
 import * as dotenv from "dotenv"
-const port = 5000;
+const port = process.env.PORT;
 
 import { TextServiceClient } from "@google-ai/generativelanguage";
 import { GoogleAuth } from "google-auth-library";
@@ -13,8 +13,13 @@ app.use(json());
 
 const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
-app.use(json()); // Add this middleware to parse JSON requests
+app.get('/', (req, res) => {
+    res.send('Welcome to the text generation server!');
+});
 
+app.get('/completions', (req, res) => {
+    res.send('Welcome to the text completions server!');
+});
 app.post('/completions', async (req, res) => {
     const options = {
         method: 'POST',
@@ -43,16 +48,16 @@ app.post('/completions', async (req, res) => {
     }
 });
 
-
+const API_KAY = process.env.REACT_APP_PALM_API_KEY;
 
 const MODEL_NAME = "models/text-bison-001";
 
 
 const client = new TextServiceClient({
-    authClient: new GoogleAuth().fromAPIKey(process.env.REACT_APP_PALM_API_KEY),
+    authClient: new GoogleAuth().fromAPIKey(API_KAY),
 });
-app.get('/', (req, res) => {
-    res.send('Welcome to the text generation server!');
+app.get('/generate-text', (req, res) => {
+    res.send('Welcome to the generation-text server!');
 });
 app.post('/generate-text', async (req, res) => {
     const { prompt } = req.body;
