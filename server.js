@@ -47,10 +47,9 @@ app.post('/completions', async (req, res) => {
 
 const MODEL_NAME = "models/text-bison-001";
 
-const API_KEY = process.env.REACT_APP_PALM_API_KEY;
 
 const client = new TextServiceClient({
-    authClient: new GoogleAuth().fromAPIKey(API_KEY),
+    authClient: new GoogleAuth().fromAPIKey(process.env.REACT_APP_PALM_API_KEY),
 });
 app.get('/', (req, res) => {
     res.send('Welcome to the text generation server!');
