@@ -2,7 +2,7 @@ import express, { json } from 'express';
 import cors from 'cors';
 const app = express();
 import * as dotenv from "dotenv"
-const port = process.env.PORT;
+const port = process.env.PORT || 8000;
 
 import { TextServiceClient } from "@google-ai/generativelanguage";
 import { GoogleAuth } from "google-auth-library";
@@ -10,12 +10,13 @@ dotenv.config()
 
 app.use(cors());
 app.use(json());
+app.use(express.static('public'));
 
 const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
-app.get('/', (req, res) => {
-    res.send('Welcome to the text generation server!');
-});
+// app.get('/', (req, res) => {
+//     res.send('Welcome to the text generation server!');
+// });
 
 app.get('/completions', (req, res) => {
     res.send('Welcome to the text completions server!');
@@ -28,14 +29,12 @@ app.post('/completions', async (req, res) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            model:"gpt-3.5-turbo-16k"  ,
+            model: "gpt-3.5-turbo",
             messages: [
-                { role: "system", content: req.body.inputTextt },
-                { role: "user", content: req.body.inputText }, // Change to inputText
-               
-                ],
-               
-           })
+                { role: "system", content: req.body.systemPrompt || "You are a helpful assistant." },
+                { role: "user", content: req.body.userPrompt },
+            ],
+        })
     };
 
     try {

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Trip Planner - Visit Morocco</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Visit Morocco</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="beaches.html">Beaches</a></li>
+                <li><a href="medina.html">Medinas</a></li>
+                <li><a href="culture.html">Culture</a></li>
+                <li><a href="food.html">Food</a></li>
+                <li><a href="planner.html" class="btn">AI Trip Planner</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1539020140153-e479b8c22e70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); height: 50vh;">
+        <div class="hero-content">
+            <h1>AI Trip Planner</h1>
+            <p>Create your perfect custom itinerary in seconds</p>
+        </div>
+    </div>
+
+    <section class="section container">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="card" style="padding: 2rem;">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Tell us about your trip</h2>
+                <form id="planner-form">
+                    <div class="form-group">
+                        <label for="duration">Duration (days)</label>
+                        <input type="number" id="duration" class="form-control" min="1" max="30" value="7" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budget">Budget Level</label>
+                        <select id="budget" class="form-control">
+                            <option value="Budget">Budget (Backpacker)</option>
+                            <option value="Moderate" selected>Moderate (Standard Hotel)</option>
+                            <option value="Luxury">Luxury (Riad/Resort)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interests">Interests (comma separated)</label>
+                        <input type="text" id="interests" class="form-control" placeholder="e.g. History, Food, Surfing, Desert" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="travelers">Who are you traveling with?</label>
+                        <select id="travelers" class="form-control">
+                            <option value="Solo">Solo</option>
+                            <option value="Couple">Couple</option>
+                            <option value="Family">Family</option>
+                            <option value="Friends">Friends</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%;">Generate Itinerary</button>
+                </form>
+
+                <div id="loader" class="loader"></div>
+                
+                <div id="itinerary-result"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Visit Morocco. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/planner.js"></script>
+</body>
+</html>
